@@ -1,0 +1,1021 @@
+{
+	"info": {
+		"_postman_id": "b652865f-fd13-48b2-85a7-36646857d045",
+		"name": "JHipster Blog Demo - Access Control Scenarios",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Scenario: Access for role  admin",
+			"item": [
+				{
+					"name": "Given I am in role admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "34a0a198-68d7-49fe-b0eb-1f58783acd4a",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"authentication successful\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"let jsonData = JSON.parse(responseBody);",
+									"pm.environment.set(\"id_token\", jsonData.id_token);"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "1e0d4627-c565-478f-af39-971f92aa55f2",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"username\", \"admin\");",
+									"pm.environment.set(\"password\", \"admin\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"{{username}}\",\"password\":\"{{password}}\"}"
+						},
+						"url": {
+							"raw": "https://crimdrac-jhipster-5-demo.herokuapp.com/api/authenticate",
+							"protocol": "https",
+							"host": [
+								"crimdrac-jhipster-5-demo",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "I can read accounts",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "6331d376-19d3-4833-b7a0-8a4ef3b8da4c",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "18fbb632-3653-41d0-bcf4-42a20190ceef",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"access granted\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://crimdrac-jhipster-5-demo.herokuapp.com/api/account",
+							"protocol": "https",
+							"host": [
+								"crimdrac-jhipster-5-demo",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"account"
+							]
+						},
+						"description": "Get account\n"
+					},
+					"response": []
+				},
+				{
+					"name": "I can read blog entries",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e7a037dc-fa36-4a7b-9868-d805b856c259",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "975c38c8-937f-4151-9c54-17b99fabccb2",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"access granted\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://crimdrac-jhipster-5-demo.herokuapp.com/api/entries?page=0&size=20&sort=id,asc",
+							"protocol": "https",
+							"host": [
+								"crimdrac-jhipster-5-demo",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"entries"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								},
+								{
+									"key": "sort",
+									"value": "id,asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "I can read the list of blogs",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c6d3323b-b852-41b4-8407-906707f561a3",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "f64cbf40-6cc1-4961-9f81-23a960c0b7f5",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"access granted\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://crimdrac-jhipster-5-demo.herokuapp.com/api/blogs",
+							"protocol": "https",
+							"host": [
+								"crimdrac-jhipster-5-demo",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"blogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "I can create a new blog",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c6d3323b-b852-41b4-8407-906707f561a3",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "9132420d-9b5c-4a79-8713-e92a11a846ed",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"access granted\", () => {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"Blog\",\"handle\":\"Handle\",\"user\":{\"id\":4,\"login\":\"user\",\"firstName\":\"User\",\"lastName\":\"User\",\"email\":\"user@localhost\",\"imageUrl\":\"\",\"activated\":true,\"langKey\":\"en\",\"createdBy\":\"system\",\"createdDate\":\"2018-09-02T21:21:52.305583Z\",\"lastModifiedBy\":\"system\",\"lastModifiedDate\":null,\"authorities\":[\"ROLE_USER\"]}}"
+						},
+						"url": {
+							"raw": "https://crimdrac-jhipster-5-demo.herokuapp.com/api/blogs",
+							"protocol": "https",
+							"host": [
+								"crimdrac-jhipster-5-demo",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"blogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "I can read metrics",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "abcf2b82-d859-47a1-a530-38d49acf7abc",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "7f6d353b-119a-4073-a749-f1e75632f011",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"access granted\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://crimdrac-jhipster-5-demo.herokuapp.com/management/metrics",
+							"protocol": "https",
+							"host": [
+								"crimdrac-jhipster-5-demo",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"management",
+								"metrics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "I can read the application's environment",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "abcf2b82-d859-47a1-a530-38d49acf7abc",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "dc2f24c1-e9a2-4697-bb55-1299650998c8",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"access granted\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://crimdrac-jhipster-5-demo.herokuapp.com/management/env",
+							"protocol": "https",
+							"host": [
+								"crimdrac-jhipster-5-demo",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"management",
+								"env"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "I can read the log entries",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "abcf2b82-d859-47a1-a530-38d49acf7abc",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "faec207c-4898-4c2c-9800-f30df31960fa",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"access granted\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://crimdrac-jhipster-5-demo.herokuapp.com/management/logs",
+							"protocol": "https",
+							"host": [
+								"crimdrac-jhipster-5-demo",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"management",
+								"logs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "I can read the log entries Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "abcf2b82-d859-47a1-a530-38d49acf7abc",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "faec207c-4898-4c2c-9800-f30df31960fa",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"access granted\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://crimdrac-jhipster-5-demo.herokuapp.com/management/logs",
+							"protocol": "https",
+							"host": [
+								"crimdrac-jhipster-5-demo",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"management",
+								"logs"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{id_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "df62b4a3-6e8c-4b64-ad5b-6c87ff9a9080",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "f09b43e9-57d2-4e79-993a-4fdd7c53c686",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Scenario: Access for role user",
+			"item": [
+				{
+					"name": "Given I am in role user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "801df7f1-1ffb-4207-8b61-22f58e0d9960",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"authentication successful\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"let jsonData = JSON.parse(responseBody);",
+									"pm.environment.set(\"id_token\", jsonData.id_token);"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "cfa5a008-5fec-4171-9abb-7cf15f062563",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"username\", \"user\");",
+									"pm.environment.set(\"password\", \"user\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTUzNzM4MDA0MH0.dQ0ThWm65aX_rf6zroVBU9wyTm4424wpSlZ_XZhBBQ1rPZecpuU79W_fZnS1trSUXowhXyIvdqkBfCmqzlKrBA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"{{username}}\",\"password\":\"{{password}}\"}"
+						},
+						"url": {
+							"raw": "https://crimdrac-jhipster-5-demo.herokuapp.com/api/authenticate",
+							"protocol": "https",
+							"host": [
+								"crimdrac-jhipster-5-demo",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "I can read accounts",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "6331d376-19d3-4833-b7a0-8a4ef3b8da4c",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "18fbb632-3653-41d0-bcf4-42a20190ceef",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"access granted\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://crimdrac-jhipster-5-demo.herokuapp.com/api/account",
+							"protocol": "https",
+							"host": [
+								"crimdrac-jhipster-5-demo",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"account"
+							]
+						},
+						"description": "Get account\n"
+					},
+					"response": []
+				},
+				{
+					"name": "I can read blog entries",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e7a037dc-fa36-4a7b-9868-d805b856c259",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "975c38c8-937f-4151-9c54-17b99fabccb2",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"access granted\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://crimdrac-jhipster-5-demo.herokuapp.com/api/entries?page=0&size=20&sort=id,asc",
+							"protocol": "https",
+							"host": [
+								"crimdrac-jhipster-5-demo",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"entries"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								},
+								{
+									"key": "sort",
+									"value": "id,asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "I can read the list of blogs",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c6d3323b-b852-41b4-8407-906707f561a3",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "f64cbf40-6cc1-4961-9f81-23a960c0b7f5",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"access granted\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://crimdrac-jhipster-5-demo.herokuapp.com/api/blogs",
+							"protocol": "https",
+							"host": [
+								"crimdrac-jhipster-5-demo",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"blogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "I can create a new blog",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c6d3323b-b852-41b4-8407-906707f561a3",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "0b053136-1b57-488e-8a25-238fe91bcdd7",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"access granted\", () => {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"Blog\",\"handle\":\"Handle\",\"user\":{\"id\":4,\"login\":\"user\",\"firstName\":\"User\",\"lastName\":\"User\",\"email\":\"user@localhost\",\"imageUrl\":\"\",\"activated\":true,\"langKey\":\"en\",\"createdBy\":\"system\",\"createdDate\":\"2018-09-02T21:21:52.305583Z\",\"lastModifiedBy\":\"system\",\"lastModifiedDate\":null,\"authorities\":[\"ROLE_USER\"]}}"
+						},
+						"url": {
+							"raw": "https://crimdrac-jhipster-5-demo.herokuapp.com/api/blogs",
+							"protocol": "https",
+							"host": [
+								"crimdrac-jhipster-5-demo",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"blogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "I cannot read the application's environment",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "abcf2b82-d859-47a1-a530-38d49acf7abc",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "e8a49351-6929-4024-a63d-7d2888a54d13",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"access denied\", () => {",
+									"    pm.response.to.have.status(403);",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://crimdrac-jhipster-5-demo.herokuapp.com/management/env",
+							"protocol": "https",
+							"host": [
+								"crimdrac-jhipster-5-demo",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"management",
+								"env"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "I cannot read the application's metrics",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "abcf2b82-d859-47a1-a530-38d49acf7abc",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "b2d68982-6628-4c25-a06c-4ce15eb97a45",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"access denied\", () => {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://crimdrac-jhipster-5-demo.herokuapp.com/management/metrics",
+							"protocol": "https",
+							"host": [
+								"crimdrac-jhipster-5-demo",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"management",
+								"metrics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "I cannot read the application's configuration",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "abcf2b82-d859-47a1-a530-38d49acf7abc",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "da282129-c97d-4006-80d3-f0f080ff7d0e",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"access denied\", () => {",
+									"    pm.response.to.have.status(403);",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://crimdrac-jhipster-5-demo.herokuapp.com/management/configprops",
+							"protocol": "https",
+							"host": [
+								"crimdrac-jhipster-5-demo",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"management",
+								"configprops"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{id_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "59cbbc9b-2ab5-4166-aa49-fc369cdcd536",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "1a8e39e3-4cf6-4544-8d55-f734dfab35ff",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "450cc236-49af-419d-b84d-a0e28ad57372",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "7475e074-bcc0-44aa-8208-59f3c126533f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
